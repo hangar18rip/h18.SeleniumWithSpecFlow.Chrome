@@ -1,0 +1,86 @@
+# ASP.NET Core
+# Build and test ASP.NET Core projects targeting .NET Core.
+# Add steps that run tests, create a NuGet package, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+name: 0.0.86.$(rev:r)
+trigger:
+  branches:
+    include:
+    - '*'  # must quote since "*" is a YAML reserved character; we want a string
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  buildConfiguration: 'Release'
+
+stages:
+- stage: Build
+  displayName: Build
+  jobs:
+  - job: Build
+    displayName: Build
+    steps:
+    - task: SonarCloudPrepare@1
+      displayName: Prepae SonarCloud analysis
+      inputs:
+        SonarCloud: 'SonarCloud'
+        organization: 'odelmotte'
+        scannerMode: 'MSBuild'
+        projectKey: 'hangar18rip.h18.SeleniumWithSpecFlow.Chrome'
+        projectName: '[h18] h18.SeleniumWithSpecFlow.Chrome'
+        projectVersion: '$(Build.BuildNumber)'
+    - script: dotnet restore
+      workingDirectory: src/
+      displayName: 'dotnet restore'
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet build $(buildConfiguration)'
+      inputs:
+        command: 'build'
+        arguments: '--no-restore -p:Version=$(Build.BuildNumber) -p:AssemblyVersion=$(Build.BuildNumber) -p:FileVersion=$(Build.BuildNumber) -p:AssemblyInformationalVersionAttribute="GitHub_Commit-$(Build.SourceVersion)'
+        workingDirectory: 'src/'
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet test'
+      inputs:
+        command: 'test'
+        arguments: '--no-restore --no-build --verbosity normal --collect "Code coverage"'
+        testRunTitle: 'Unit Tests'
+        workingDirectory: 'src/'
+    - task: SonarCloudAnalyze@1
+      displayName: Run SonarCloud analysis
+    - task: SonarCloudPublish@1
+      displayName: Wait for SonarCloud analysis
+      inputs:
+        pollingTimeoutSec: '300'
+    - task: CopyFiles@2
+      displayName: Create artifact
+      inputs:
+        SourceFolder: 'src/'
+        Contents: '**/*.nupkg'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)/nuget'
+        flattenFolders: true
+    - task: PublishPipelineArtifact@1
+      displayName: Publish artifact
+      inputs:
+        targetPath: '$(Build.ArtifactStagingDirectory)/nuget'
+        artifact: 'nuget'
+        publishLocation: 'pipeline'
+- stage: Publish
+  displayName: Publish
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  jobs:
+  - job: Publish
+    displayName: Publish
+    steps:
+    - checkout: none
+    - download: current
+      artifact: nuget
+    - task: NuGetCommand@2
+      displayName: 'NuGet push'
+      inputs:
+        command: push
+        nuGetFeedType: external
+        packagesToPush: '$(Pipeline.Workspace)/nuget/*.nupkg;!$(Pipeline.Workspace)/nuget/*.symbols.nupkg'
+        publishFeedCredentials: NuGet
+      

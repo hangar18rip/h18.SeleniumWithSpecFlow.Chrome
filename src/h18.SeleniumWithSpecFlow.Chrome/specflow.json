@@ -1,7 +1,7 @@
 {
   "stepAssemblies": [
     {
-      "assembly": "h18.SpecFlow.SeleniumHookChrome"
+      "assembly": "h18.SeleniumWithSpecFlow.Chrome"
     }
   ]
 }

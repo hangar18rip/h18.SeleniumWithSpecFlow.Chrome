@@ -24,11 +24,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="specflow.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="h18.SeleniumWithSpecFlow" Version="0.1.0.1" />
+    <PackageReference Include="h18.SeleniumWithSpecFlow" Version="0.1.0.5" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="86.0.4240.2200" />
   </ItemGroup>
 
@@ -39,4 +35,9 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Include="SpecFlow.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 </Project>

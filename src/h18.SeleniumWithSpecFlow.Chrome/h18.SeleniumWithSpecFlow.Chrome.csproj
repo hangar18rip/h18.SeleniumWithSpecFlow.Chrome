@@ -6,7 +6,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 
     <Authors>Olivier Delmotte</Authors>
-    <Description>Adds extended features when running Selenium tests with SpecFlow and MSTest framework in Google Chrome</Description>
+    <Description>Adds extended features when running Selenium tests with SpecFlow, MSTest framework and Google Chrome</Description>
     
     <NuspecProperties></NuspecProperties>
     <ContentTargetFolders>myspecialcontent</ContentTargetFolders>
@@ -14,17 +14,17 @@
     <RepositoryCommit></RepositoryCommit>
     <RepositoryBranch></RepositoryBranch>
     <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/hangar18rip/h18.SeleniumWithSpecFlow.git</RepositoryUrl>
+    <RepositoryUrl>https://github.com/hangar18rip/h18.SeleniumWithSpecFlow.Chrome.git</RepositoryUrl>
     <IncludeSource>false</IncludeSource>
     <Copyright>Olivier Delmotte</Copyright>
     <PackageTags>Selenium,Specflow,Chrome</PackageTags>
-    <PackageProjectUrl>https://github.com/hangar18rip/h18.SeleniumWithSpecFlow</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/hangar18rip/h18.SeleniumWithSpecFlow.Chrome</PackageProjectUrl>
     <PackageLicenseExpression></PackageLicenseExpression>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="h18.SeleniumWithSpecFlow" Version="0.1.0.5" />
+    <PackageReference Include="h18.SeleniumWithSpecFlow" Version="0.1.0.7" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="86.0.4240.2200" />
   </ItemGroup>
 

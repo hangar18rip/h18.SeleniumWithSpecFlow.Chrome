@@ -17,13 +17,13 @@ namespace h18.SeleniumWithSpecFlow.Chrome.UnitTests
         [BeforeScenario()]
         public void BeforeScenario()
         {
-            context.Add("driverConfiguraiton", new ChromeHookConfiguration { WindowsState = WindowsState.Maximize });
+            context.Add(Keys.DriverConfigurationRegistrationKey, new ChromeHookConfiguration { WindowsState = WindowsState.Maximize });
         }
 
         [Given(@"the first number is (.*)")]
         public void GivenTheFirstNumberIs(int p0)
         {
-            var driver = context.Get<ChromeDriver>("currentDriver");
+            var driver = context.Get<ChromeDriver>(Keys.DriverRegistrationKey);
             driver.Manage().Window.Position = new System.Drawing.Point(200, 200);
             driver.Manage().Window.Size = new System.Drawing.Size(200, 200);
         }

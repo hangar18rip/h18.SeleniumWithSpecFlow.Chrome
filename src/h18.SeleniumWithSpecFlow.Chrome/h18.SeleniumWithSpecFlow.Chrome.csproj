@@ -9,7 +9,6 @@
     <Description>Adds extended features when running Selenium tests with SpecFlow, MSTest framework and Google Chrome</Description>
     
     <NuspecProperties></NuspecProperties>
-    <ContentTargetFolders>myspecialcontent</ContentTargetFolders>
     <AssemblyInformationalVersionAttribute>No value at edit time</AssemblyInformationalVersionAttribute>
     <RepositoryCommit></RepositoryCommit>
     <RepositoryBranch></RepositoryBranch>
@@ -24,15 +23,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="h18.SeleniumWithSpecFlow" Version="0.1.0.7" />
-    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="86.0.4240.2200" />
+    <None Include="..\..\LICENSE" Link="LICENSE">
+      <PackagePath></PackagePath>
+      <Pack>True</Pack>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\..\LICENSE">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
+    <PackageReference Include="h18.SeleniumWithSpecFlow" Version="0.1.0.8" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="86.0.4240.2200" />
   </ItemGroup>
 
   <ItemGroup>

@@ -11,7 +11,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="h18.SeleniumWithSpecFlow" Version="0.1.0.7" />
     <PackageReference Include="Microsoft.CodeCoverage" Version="16.8.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.0" />
     <PackageReference Include="MSTest.TestAdapter" Version="2.1.2" />
@@ -25,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="specflow.json">
+    <None Update="SpecFlow.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
